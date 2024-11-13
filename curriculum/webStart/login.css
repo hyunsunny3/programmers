@@ -1,0 +1,10 @@
+/* 241106 수업내용 */
+h1{
+  color:rgb(255, 131, 16); text-align: center;
+}
+.ipt_login{
+  font-size: 25px;
+}
+#btn_login{
+  width: 100px; height: 50px;
+}
