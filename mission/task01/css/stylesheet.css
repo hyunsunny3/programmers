@@ -1,0 +1,103 @@
+.border{
+  border: 1px solid #000;
+}
+
+header{
+  padding: 3rem 2rem;
+}
+header h1{
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+header a{
+  display: inline-block;
+  text-transform: capitalize;
+  border: 1px solid #000;
+  padding: 0.8rem 2rem;
+  border-radius: 0.3rem;
+  background: #000;
+  color: #fff;
+  transition: all 0.3s;
+}
+header a:hover{
+  background: #fff;
+  color: #000;
+}
+
+.mainVisual {
+  text-align: center;
+  padding: 20rem 0;
+  
+}
+.mainVisual p{
+  text-transform: capitalize;
+  font-size: 2.4rem;
+  line-height: 1.6;
+}
+
+.cardWr{
+  display:grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.card {
+  text-align: center;
+}
+.card:not(:last-child){
+  border-right: 0;
+}
+
+.card .imgWr{
+  height: 75%;
+  padding: 1rem;
+  transition: all 0.3s;
+}
+.card .desc{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 25%;
+  padding: 0 3rem;
+  transition: all 0.3s;
+  border-top: 1px solid #000;
+}
+.card_title {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+.card_button {
+  font-size: 1.8rem;
+  cursor: pointer;
+  border: 1px solid #000;
+  padding: 0.8rem 2rem;
+  transition: all 0.3s;
+  border-radius: 0.3rem;
+  text-transform: uppercase;
+}
+
+.card:hover .imgWr{
+  padding: 0;
+}
+.card:hover .desc{
+  background: #000;
+}
+.card:hover .desc *{
+  color: #fff;
+}
+.card:hover .card_button{
+  border: 1px solid #fff;
+  
+}
+.card .card_button:hover{
+  border: 1px solid #d8002f;
+  background: #d8002f;
+}
+
+footer{
+  padding: 2rem 0;
+  text-align: center;
+}
+
+
+.orderlist table{
+  text-align: center;
+}
