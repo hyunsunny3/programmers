@@ -63,3 +63,32 @@ function playGame(){
     alert("매플리케이션이 종료되었습니다.");
 }
 playGame();
+
+
+/*
+// ** 피드백 **
+
+// 스트라이크
+const isStrike = (userNumber, computerNumbers, userNumberIndex) => {
+    return computerNumbers.indexOf(userNumber) === userNumber;
+  }
+  
+  // 스트라이크 갯수
+  const getStrikeCount = (userNumber, computerNumbers) => {
+      return userNumber.filter((userNumber, userNumberIndex) => isStrike(userNumber, computerNumbers, userNumberIndex)).length;
+  }
+  
+  // 볼
+  const isBall = (userNumber, computerNumbers, userNumberIndex) => {
+    return computerNumbers.includes(userNumber) && computerNumbers.indexOf(userNumber) !== userNumberIndex;
+  }
+  
+  // 볼 갯수
+  const getBallCount = (userNumber, computerNumbers) => {
+      return userNumber.filter((userNumber, userNumberIndex) => isBall(userNumber, computerNumbers, userNumberIndex)).length;
+  }
+  
+  const isOut = (strikeCount, ballCount) => {
+    return strikeCount === 0 && ballCount === 0;
+  }
+  */
