@@ -47,7 +47,17 @@ db.set(id++, youtuber3);
 //    > res : "channelTitle님, 유튜버 생활을 응원합니다!"
 
 app.get('/youtubers', (req,res) => {
-  res.json(db)
+  let youtubers = {}
+  db.forEach((value, key) => {
+    youtubers[key] = value
+  })
+
+  // db.forEach((youtuber) => {
+  //   youtubers[youtuber.channelTit] = value
+  // })
+
+  // res.json(JSON.stringify(youtubers))
+  res.json(youtubers)
 })
 
 app.get('/youtubers/:id',function(req,res){
