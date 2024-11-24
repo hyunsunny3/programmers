@@ -43,8 +43,19 @@ db.set(id++, product3);
 //    > req : params.id <= map에 저장된 key 값을 전달
 //    > res : map에서 id로 객체를 조회 후 전달
 // 2. 상품 등록 : POST/products
-//    > req : body <= productNamele, price = 0, description = 0 신규 상품 정보 전달
+//    > req : body <= productName, price = 0, description = 0 신규 상품 정보 전달
 //    > res : "productName의 등록이 완료되었습니다!"
+// 3. 상품 삭제 : DELETE/products/:id
+//    > req : params.id
+//    > res : "productName상품이 삭제되었습니다."
+// 4. 전체 삭제 삭제 : DELETE/products
+//    > req : X
+//    > res : "전체 삭제 완료"
+//      db에 값이 1개 이상이면 전체 삭제
+//      db에 값이 없으면 "삭제할 데이터가 없습니다"
+// 5. 개별 상품 수정 : PUT/products/:id
+//    > req : params.id, body <= productName
+//    > res : "productName"상품이 새로운"productName"으로 변경되었습니다.
 
 app.get('/products', (req,res) => {
   let products = {}
@@ -87,9 +98,56 @@ app.post('/products',(req, res) => {
   })
 })
 
+app.delete('/products/:id',(req, res) => {
+  let {id} = req.params
+  id = parseInt(id)
 
+  let prd = db.get(id)
+  if(prd == undefined){
+    res.json({
+      message : `요청하신 ${id}상품은 없는 상품입니다.`
+    })
+  }else{
+    const productName = prd.productName
+    db.delete(id)
+  
+    res.json({
+      message : `${productName}상품이 삭제되었습니다.`
+    })
+  }
+})
 
+app.delete('/products',(req, res) => {
+  let msg = ""
+  
+  if(db.size >= 1){
+    db.clear()
+    msg = "전체 삭제 완료"
+  }else{
+    msg = "삭제할 데이터가 없습니다"
+  }
 
-// 채널 주소 : https://www.youtube.com/@15ya_egg
-// 채널 주소 : https://www.youtube.com/@ChimChakMan_Official
-// 채널 주소 : https://www.youtube.com/@TEO_universe
+  res.json({
+    message : msg
+  })
+})
+
+app.put('/products/:id',(req, res) => {
+  let {id} = req.params
+  id = parseInt(id)
+
+  let prd = db.get(id);
+  let odlName = prd.productName;
+  if(prd == undefined){
+    res.json({
+      message : `요청하신 ${id}상품은 없는 상품입니다.`
+    })
+  }else{
+    let newName = req.body.productName;
+    prd.productName = newName;
+    db.set(id, prd)
+    res.json({
+      message : `${odlName}상품이 ${newName}으로 변경되었습니다.`
+    })
+  }
+})
