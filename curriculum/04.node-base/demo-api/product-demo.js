@@ -48,7 +48,7 @@ db.set(id++, product3);
 // 3. 상품 삭제 : DELETE/products/:id
 //    > req : params.id
 //    > res : "productName상품이 삭제되었습니다."
-// 4. 전체 삭제 삭제 : DELETE/products
+// 4. 전체 상품 삭제 : DELETE/products
 //    > req : X
 //    > res : "전체 삭제 완료"
 //      db에 값이 1개 이상이면 전체 삭제
@@ -57,6 +57,7 @@ db.set(id++, product3);
 //    > req : params.id, body <= productName
 //    > res : "productName"상품이 새로운"productName"으로 변경되었습니다.
 
+// 0. 전체 상품 조회
 app.get('/products', (req,res) => {
   let products = {}
   db.forEach((value, key) => {
@@ -71,6 +72,7 @@ app.get('/products', (req,res) => {
   res.json(products)
 })
 
+// 1. 개별 상품 조회
 app.get('/products/:id',function(req,res){
   let {id} = req.params
   id = parseInt(id)
@@ -87,6 +89,7 @@ app.get('/products/:id',function(req,res){
   }
 })
 
+// 2. 상품 등록
 app.use(express.json()) // http 외 모듈인 '미들웨어' json 설정
 app.post('/products',(req, res) => {
   console.log(req.body)
@@ -98,6 +101,7 @@ app.post('/products',(req, res) => {
   })
 })
 
+// 3. 상품 삭제
 app.delete('/products/:id',(req, res) => {
   let {id} = req.params
   id = parseInt(id)
@@ -117,6 +121,7 @@ app.delete('/products/:id',(req, res) => {
   }
 })
 
+// 4. 전체 상품 삭제
 app.delete('/products',(req, res) => {
   let msg = ""
   
@@ -132,13 +137,14 @@ app.delete('/products',(req, res) => {
   })
 })
 
+// 5. 개별 상품 수정
 app.put('/products/:id',(req, res) => {
   let {id} = req.params
   id = parseInt(id)
 
   let prd = db.get(id);
   let odlName = prd.productName;
-  if(prd == undefined){
+  if(prd){
     res.json({
       message : `요청하신 ${id}상품은 없는 상품입니다.`
     })
